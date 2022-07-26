@@ -177,11 +177,6 @@ class Con_estimator(nn.Module):
                                             nn.ReLU()) # sigmoid
         self.last_layer = nn.Linear(32, 1)
         
-        # torch.nn.init.zeros_(self.last_layer.weight)
-        # torch.nn.init.zeros_(self.last_layer.bias)
-        # torch.nn.init.constant_(self.last_layer.bias, 2.9445) # 95
-        # torch.nn.init.constant_(self.last_layer.bias, 2.1973) # 90
-        # torch.nn.init.constant_(self.last_layer.bias, 1.7348) #85
                                
 
 
@@ -558,21 +553,7 @@ class ConMatch2:
                                                                     use_hard_labels=args.hard_label)
                         
             sup_loss_fix = ce_loss(logits_x_lb, y_lb, reduction='mean')                       
-            # unsup_loss_con, mask, select, pseudo_lb = consistency_loss_con(logits_x_ulb_s,
-            #                                                            logits_x_ulb_w,
-            #                                                            con_x_ulb_unsup,
-            #                                                            'ce', T, p_cutoff_con_ulb,
-            #                                                            use_hard_labels=args.hard_label)
-            
 
-            # con_loss = torch.tensor(0.0, device=device)
-            # fixmatch_loss_2 = torch.tensor(0.0, device=device)
-            # reg_con_loss_1 = torch.tensor(0.0, device=device)
-            # reg_con_loss_2 = torch.tensor(0.0, device=device)
-            # loss_ours_1 = torch.tensor(0.0, device=device)
-            # loss_ours_2 = torch.tensor(0.0, device=device)
-            # loss_ours_ss_1 = torch.tensor(0.0, device=device)
-            # loss_ours_ss_2 = torch.tensor(0.0, device=device)
 
 
             total_loss = sup_loss_fix + self.lambda_u * fixmatch_loss_1 + self.lambda_u * fixmatch_loss_2 \
@@ -584,15 +565,8 @@ class ConMatch2:
             y_logits_ulb= softmax(y_logits_ulb,axis=-1)
             max_prob_l, max_idx_l = torch.max(torch.tensor(y_logits_lb).cuda(args.gpu),dim=-1)
             max_prob_w, max_idx_w = torch.max(torch.tensor(y_logits_ulb).cuda(args.gpu),dim=-1)
-            # max_prob_l, max_idx_l = torch.max(torch.softmax(logits_x_lb, dim=-1), dim=-1)
-            # max_prob_w, max_idx_w = torch.max(torch.softmax(logits_x_ulb_w, dim=-1), dim=-1)
-            # max_prob_l, max_idx_l = torch.max(torch.softmax(logits_x_lb, dim=-1), dim=-1)
-            # max_prob_w, max_idx_w = torch.max(torch.softmax(logits_x_ulb_w, dim=-1), dim=-1)
-            # confidence by confidence_estimator
-
-            # lb_fix_list = estimate_metric_binary(max_idx_l, y_lb, max_prob_l, p_cutoff)        
+    
             lb_con_list = estimate_metric_binary_2(max_idx_l, y_lb, con_output[:num_lb], p_cutoff, est_AUC = False)        
-            # ulb_fix_list = estimate_metric_binary(max_idx_w, y_ulb, max_prob_w, p_cutoff)        
             ulb_con_list = estimate_metric_binary_2(max_idx_w, y_ulb, con_output[num_lb: num_lb + num_ulb], p_cutoff, est_AUC = True)        
 
 
