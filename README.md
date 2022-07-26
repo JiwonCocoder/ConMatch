@@ -1,3 +1,3 @@
 
-## Official implementation of GLUNet
+## Official implementation of ConMatch
  
