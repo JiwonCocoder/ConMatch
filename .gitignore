@@ -1,3 +1,5 @@
+.DS_Store
+
 data_statistics/
 data/
 saved_models/
