@@ -64,6 +64,6 @@ If you find this work useful for your research, please cite our paper:
 ## ImageNet Dataset
 ImageNet datasets can be downloaded from the [official site](https://image-net.org/challenges/LSVRC/2012/2012-downloads.php) and follow the guide described in [TorchSSL](https://github.com/TorchSSL/TorchSSL).
 
-## Related Projects
+## Related Projects 
 
 Our model code starts from [TorchSSL](https://github.com/TorchSSL/TorchSSL).
