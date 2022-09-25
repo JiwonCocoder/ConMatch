@@ -270,7 +270,7 @@ def main_worker(gpu, ngpus_per_node, args):
     
     # SET Optimizer & LR Scheduler
     ## construct SGD and cosine lr scheduler
-    #end-to-end
+    
     optimizer = get_optimizer_con(model, args.optim, args.lr, args.lr_con, args.momentum, args.weight_decay)
     scheduler = get_cosine_schedule_with_warmup(optimizer,
                                                 args.num_train_iter,
