@@ -32,9 +32,7 @@ def main(args):
         args.save_name = args.save_name + '_{}'.format('pretrained_con')        
         if args.load_path is None:
             raise Exception('Resume of training requires --load_path in the args')
-        # if os.path.abspath(save_path) == os.path.abspath(args.load_path) and not args.overwrite:
-        #     raise Exception('Saving & Loading pathes are same. \
-        #                     If you want over-write, give --overwrite in the argument.')
+        
         if args.resume_con:
             args.load_path_con = os.path.join(args.load_dir_con, args.load_model_con)
             args.loaded_it = torch.load(args.load_path)['it']
@@ -241,9 +239,7 @@ def main_worker(gpu, ngpus_per_node, args):
         lb_dset = image_loader.get_lb_train_data()
         ulb_dset = image_loader.get_ulb_train_data()
         eval_dset = image_loader.get_lb_test_data()
-    
-    # if args.rank == 0:
-    #     torch.distributed.barrier()
+   
    
     loader_dict = {}
     dset_dict = {'train_lb': lb_dset, 'train_ulb': ulb_dset, 'eval': eval_dset}
