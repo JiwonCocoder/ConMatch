@@ -362,38 +362,7 @@ def ce_loss(logits, targets, use_hard_labels=True, reduction='none'):
         log_pred = F.log_softmax(logits, dim=-1)
         nll_loss = torch.sum(-targets * log_pred, dim=1)
         return nll_loss
-
-# class EMA:
-#    """
-#    Implementation from https://fyubang.com/2019/06/01/ema/
-#    """
-#
-#    def __init__(self, model, decay):
-#        self.model = model
-#        self.decay = decay
-#        self.shadow = {}
-#        self.backup = {}
-#    
-#    def load(self, model):
-#        self.model.load_state_dict(model.state_dict())
-#
-#    def register(self):
-#        self.shadow = deepcopy(self.model.state_dict())
-#
-#
-#    def update(self): 
-#        for name, param in self.model.state_dict().items():
-#            assert name in self.shadow
-#            new_avg = (1.0 - self.decay) * param + self.decay * self.shadow[name]
-#            self.shadow[name] = new_avg
-#
-#    def apply_shadow(self):
-#        self.backup = deepcopy(self.model.state_dict())
-#        self.model.load_state_dict(self.shadow)
-#
-#    def restore(self):
-#        self.model.load_state_dict(self.backup)
-#        self.backup = {}
+    
 class EMA:
     """
     Implementation from https://fyubang.com/2019/06/01/ema/
